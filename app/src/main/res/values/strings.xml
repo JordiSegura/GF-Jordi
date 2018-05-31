@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">GetFit</string>
+    <string name="gender">Elige tu género</string>
+    <string-array name="gender_array">
+        <item>Hombre</item>
+        <item>Mujer</item>
+    </string-array>
+    <string name="title_activity_dias">DiasActivity</string>
+    <string name="title_activity_lunes">LunesActivity</string>
+</resources>
