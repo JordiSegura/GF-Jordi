@@ -2,11 +2,16 @@ package vidal.sergi.getfit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +27,7 @@ public class DiasActivity extends AppCompatActivity {
     public final String TAG ="DiasActivity";
     Intent intent;
 
+    ImageView ivLogo;
 
 
 
@@ -30,11 +36,40 @@ public class DiasActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home2);
+        setContentView(R.layout.activity_dias);
         Log.d(TAG, "onCreate: started.");
 
         initImageBitmaps();
-
+        ivLogo = findViewById(R.id.ivLogo1);
+        ivLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(DiasActivity.this, AjustesActivity.class);
+                startActivity(intent);
+            }
+        });
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation4);
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_home:
+                        intent = new Intent(DiasActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_rutinas:
+                        intent = new Intent(DiasActivity.this, RutinasActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_dietas:
+                        intent = new Intent(DiasActivity.this, DietasActivity.class);
+                        startActivity(intent);;
+                        break;
+                }
+                return true;
+            }
+        });
 
     }
 
@@ -73,7 +108,7 @@ public class DiasActivity extends AppCompatActivity {
 
 
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        RecyclerView recyclerView = findViewById(R.id.recycler1);
         DiasAdapter adapter = new DiasAdapter(mNames,mImageUrls,this,contador2);
         adapter.setIntento(val);
         Log.d(TAG, "initRecyclerView: En DiasActivity pilla ESTO:"+adapter.getIntento());

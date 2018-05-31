@@ -10,6 +10,17 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_navigation2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="@color/colorNavBar"
+        app:itemIconTint="@color/bottom_nav_color"
+        app:menu="@menu/bottom_navigation_main"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="513dp" />
+
 
 
 

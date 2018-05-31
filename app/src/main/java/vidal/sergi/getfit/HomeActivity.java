@@ -29,10 +29,12 @@ import static android.view.View.GONE;
 
 public class HomeActivity extends AppCompatActivity {
     private static final String TAG ="HomeActivity";
-
+    Intent intent;
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
+    ImageView ivLogo;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +42,36 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home2);
         Log.d(TAG, "onCreate: started.");
         initImageBitmaps();
+        ivLogo = findViewById(R.id.ivLogo2);
+        ivLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(HomeActivity.this, AjustesActivity.class);
+                startActivity(intent);
+            }
+        });
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation1);
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_home:
+                        intent = new Intent(HomeActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_rutinas:
+                        intent = new Intent(HomeActivity.this, RutinasActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_dietas:
+                        intent = new Intent(HomeActivity.this, DietasActivity.class);
+                        startActivity(intent);;
+                        break;
+                }
+                return true;
+            }
+        });
     }
     private void initImageBitmaps(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");

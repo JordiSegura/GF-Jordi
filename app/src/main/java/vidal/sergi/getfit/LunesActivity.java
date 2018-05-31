@@ -1,6 +1,9 @@
 package vidal.sergi.getfit;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +30,7 @@ public class LunesActivity extends AppCompatActivity {
     RecyclerView rv;
     List<String> diasSemanas;
     LunesAdapter adapter;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,32 @@ public class LunesActivity extends AppCompatActivity {
                 }
             });
 
-
+        final BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation2);
+        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.action_home:
+                        intent = new Intent(LunesActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_rutinas:
+                        intent = new Intent(LunesActivity.this, RutinasActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.action_dietas:
+                        intent = new Intent(LunesActivity.this, DietasActivity.class);
+                        startActivity(intent);;
+                        break;
+//                    case R.id.action_ajustes:
+//                        intent = new Intent(DietasActivity.this, AjustesActivity.class);
+//                        startActivity(intent);
+//                        break;
+                }
+                return true;
+            }
+        });
 
         }
 
